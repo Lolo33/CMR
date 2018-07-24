@@ -1,0 +1,45 @@
+{
+	"clientPhone": "05541232XX",
+	"clientName": "John Doe",
+	"clientAddressLine1": "11 rue des coquelicots",
+	"clientCountryCode": "33150",
+	"clientCity": "Cenon",
+	"hourToBeReady": "2018-03-05 11:30:00",
+	"orderType": 2,
+	"precisions": "Pas trop de sauce algérienne",
+	"extraLines": [
+		{
+			"text": "promo1",
+			"value": -2.5
+		}
+	],
+	"products": [
+		{
+			"id": 5,
+			"options": [
+				{
+					"id": 1
+				},
+				{
+					"id": 5
+				}
+			],
+			"supplements":[
+				{
+					"id": 1
+				}
+			]
+		},
+		{
+			"id": 5,
+			"options": [
+				{
+					"id": 2
+				},
+				{
+					"id": 4
+				}
+			]
+		}
+	]
+}

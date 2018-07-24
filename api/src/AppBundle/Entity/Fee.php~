@@ -1,0 +1,196 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Fee
+ *
+ * @ORM\Table(name="fee")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ComissionsRepository")
+ */
+class Fee
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var Corporate
+     *
+     * @ORM\ManyToOne(targetEntity="Corporate")
+     */
+    private $corporate;
+
+    /**
+     * @var OrderType
+     *
+     * @ORM\ManyToOne(targetEntity="OrderType")
+     */
+    private $orderType;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="value", type="float")
+     */
+    private $value;
+
+    /**
+     * @var Restaurant
+     *
+     * @ORM\ManyToOne(targetEntity="Restaurant")
+     */
+    private $restaurant;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="accepted", type="boolean")
+     */
+    private $accepted;
+
+    /**
+     * @var Restaurant
+     *
+     * @ORM\ManyToOne(targetEntity="FeeType")
+     */
+    private $type;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set corporate
+     *
+     * @param string $corporate
+     *
+     * @return Fee
+     */
+    public function setCorporate($corporate)
+    {
+        $this->corporate = $corporate;
+
+        return $this;
+    }
+
+    /**
+     * Get corporate
+     *
+     * @return string
+     */
+    public function getCorporate()
+    {
+        return $this->corporate;
+    }
+
+    /**
+     * Set orderType
+     *
+     * @param string $orderType
+     *
+     * @return Fee
+     */
+    public function setOrderType($orderType)
+    {
+        $this->orderType = $orderType;
+
+        return $this;
+    }
+
+    /**
+     * Get orderType
+     *
+     * @return string
+     */
+    public function getOrderType()
+    {
+        return $this->orderType;
+    }
+
+    /**
+     * Set value
+     *
+     * @param float $value
+     *
+     * @return Fee
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get value
+     *
+     * @return float
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Set accepted
+     *
+     * @param boolean $accepted
+     *
+     * @return Fee
+     */
+    public function setAccepted($accepted)
+    {
+        $this->accepted = $accepted;
+
+        return $this;
+    }
+
+    /**
+     * Get accepted
+     *
+     * @return boolean
+     */
+    public function getAccepted()
+    {
+        return $this->accepted;
+    }
+
+    /**
+     * Set restaurant
+     *
+     * @param \AppBundle\Entity\Restaurant $restaurant
+     *
+     * @return Fee
+     */
+    public function setRestaurant(\AppBundle\Entity\Restaurant $restaurant = null)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant
+     *
+     * @return \AppBundle\Entity\Restaurant
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
+    }
+}

@@ -1,0 +1,210 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Business
+ *
+ * @ORM\Table(name="business")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BuisnessRepository")
+ */
+class Business extends Corporate
+{
+
+    /**
+     * @var Order[]
+     *
+     * @ORM\ManyToMany(targetEntity="Town")
+     */
+    private $activeTowns;
+
+    /**
+     * @var Order[]
+     *
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="business")
+     */
+    private $ordersList;
+
+    /**
+     * @var Contract[]
+     *
+     * @ORM\OneToMany(targetEntity="Contract", mappedBy="business")
+     */
+    private $appliedFees;
+
+    /**
+     * @var
+     *
+     * @ORM\Column(type="float", name="solde")
+     */
+    private $sold;
+
+    /**
+     * @var
+     *
+     * @ORM\Column(type="string", length=255, name="stripe_id")
+     */
+    private $stripeId;
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ordersList = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add ordersList
+     *
+     * @param \AppBundle\Entity\Order $ordersList
+     *
+     * @return Business
+     */
+    public function addOrdersList(\AppBundle\Entity\Order $ordersList)
+    {
+        $this->ordersList[] = $ordersList;
+
+        return $this;
+    }
+
+    /**
+     * Remove ordersList
+     *
+     * @param \AppBundle\Entity\Order $ordersList
+     */
+    public function removeOrdersList(\AppBundle\Entity\Order $ordersList)
+    {
+        $this->ordersList->removeElement($ordersList);
+    }
+
+    /**
+     * Get ordersList
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrdersList()
+    {
+        return $this->ordersList;
+    }
+
+    /**
+     * Add appliedFee
+     *
+     * @param \AppBundle\Entity\Contract $appliedFee
+     *
+     * @return Business
+     */
+    public function addAppliedFee(\AppBundle\Entity\Contract $appliedFee)
+    {
+        $this->appliedFees[] = $appliedFee;
+
+        return $this;
+    }
+
+    /**
+     * Remove appliedFee
+     *
+     * @param \AppBundle\Entity\Contract $appliedFee
+     */
+    public function removeAppliedFee(\AppBundle\Entity\Contract $appliedFee)
+    {
+        $this->appliedFees->removeElement($appliedFee);
+    }
+
+    /**
+     * Get appliedFees
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAppliedFees()
+    {
+        return $this->appliedFees;
+    }
+
+    /**
+     * Add activeTown
+     *
+     * @param \AppBundle\Entity\Town $activeTown
+     *
+     * @return Business
+     */
+    public function addActiveTown(\AppBundle\Entity\Town $activeTown)
+    {
+        $this->activeTowns[] = $activeTown;
+
+        return $this;
+    }
+
+    /**
+     * Remove activeTown
+     *
+     * @param \AppBundle\Entity\Town $activeTown
+     */
+    public function removeActiveTown(\AppBundle\Entity\Town $activeTown)
+    {
+        $this->activeTowns->removeElement($activeTown);
+    }
+
+    /**
+     * Get activeTowns
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActiveTowns()
+    {
+        return $this->activeTowns;
+    }
+
+    /**
+     * Set sold
+     *
+     * @param string $sold
+     *
+     * @return Business
+     */
+    public function setSold($sold)
+    {
+        $this->sold = $sold;
+
+        return $this;
+    }
+
+    /**
+     * Get sold
+     *
+     * @return string
+     */
+    public function getSold()
+    {
+        return $this->sold;
+    }
+
+    /**
+     * Set stripeId
+     *
+     * @param string $stripeId
+     *
+     * @return Business
+     */
+    public function setStripeId($stripeId)
+    {
+        $this->stripeId = $stripeId;
+
+        return $this;
+    }
+
+    /**
+     * Get stripeId
+     *
+     * @return string
+     */
+    public function getStripeId()
+    {
+        return $this->stripeId;
+    }
+}

@@ -1,0 +1,217 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Interlocutor
+ *
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\InterlocutorsRepository")
+ */
+class Interlocutor
+{
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=255)
+     */
+    private $role;
+
+    /**
+     * @var Structure
+     *
+     * @ORM\ManyToOne(targetEntity="Structure", inversedBy="interlocutorsList")
+     */
+    private $structure;
+
+    /**
+     * @var ContactInformation[]
+     *
+     * @ORM\OneToMany(targetEntity="ContactInformation", mappedBy="interlocutor")
+     */
+    private $contactInformations;
+
+    /**
+     * @var ContactInformation[]
+     *
+     * @ORM\OneToMany(targetEntity="Exchange", mappedBy="interlocutor")
+     */
+    private $exchangesList;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set structure
+     *
+     * @param \AppBundle\Entity\Structure $structure
+     *
+     * @return Interlocutor
+     */
+    public function setStructure(\AppBundle\Entity\Structure $structure = null)
+    {
+        $this->structure = $structure;
+
+        return $this;
+    }
+
+    /**
+     * Get structure
+     *
+     * @return \AppBundle\Entity\Structure
+     */
+    public function getStructure()
+    {
+        return $this->structure;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->contactInformations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Interlocutor
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add contactInformation
+     *
+     * @param \AppBundle\Entity\ContactInformation $contactInformation
+     *
+     * @return Interlocutor
+     */
+    public function addContactInformation(\AppBundle\Entity\ContactInformation $contactInformation)
+    {
+        $this->contactInformations[] = $contactInformation;
+
+        return $this;
+    }
+
+    /**
+     * Remove contactInformation
+     *
+     * @param \AppBundle\Entity\ContactInformation $contactInformation
+     */
+    public function removeContactInformation(\AppBundle\Entity\ContactInformation $contactInformation)
+    {
+        $this->contactInformations->removeElement($contactInformation);
+    }
+
+    /**
+     * Get contactInformations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContactInformations()
+    {
+        return $this->contactInformations;
+    }
+
+    /**
+     * Set role
+     *
+     * @param string $role
+     *
+     * @return Interlocutor
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Add exchangesList
+     *
+     * @param \AppBundle\Entity\Exchange $exchangesList
+     *
+     * @return Interlocutor
+     */
+    public function addExchangesList(\AppBundle\Entity\Exchange $exchangesList)
+    {
+        $this->exchangesList[] = $exchangesList;
+
+        return $this;
+    }
+
+    /**
+     * Remove exchangesList
+     *
+     * @param \AppBundle\Entity\Exchange $exchangesList
+     */
+    public function removeExchangesList(\AppBundle\Entity\Exchange $exchangesList)
+    {
+        $this->exchangesList->removeElement($exchangesList);
+    }
+
+    /**
+     * Get exchangesList
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExchangesList()
+    {
+        return $this->exchangesList;
+    }
+}

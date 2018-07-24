@@ -1,0 +1,7 @@
+{
+  "url_local": "http://localhost/cmr/api/web/app_dev.php",
+  "url_prod": "http://localhost/cmr/api/web/app_dev.php",
+  "url_test": "http://localhost/cmr/api/web/app_dev.php",
+  "mode": "prod",
+  "api_key": "CW3tbH8v/SLvFG8/y0UPIOnenuw="
+}

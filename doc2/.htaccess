@@ -1,0 +1,1 @@
+ErrorDocument 404 http://connectmybooking.com/api/errors/404.php

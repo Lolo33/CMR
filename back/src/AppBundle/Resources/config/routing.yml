@@ -1,0 +1,4 @@
+
+get_restaurants:
+    path:     /getRestaurants
+    defaults: { _controller: AppBundle:Restaurants:getRestaurants }

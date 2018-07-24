@@ -1,0 +1,41 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        auth_token_user_provider:
+            id: auth_token_user_provider
+        admin_auth_token_user_provider:
+            id: admin_auth_token_user_provider
+
+    firewalls:
+        # désactive l'authentification pour l'accès aux assets et au profiler
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        admin:
+            pattern: ^/admin
+            stateless: true
+            simple_preauth:
+                authenticator: admin_auth_token_authenticator
+            provider: admin_auth_token_user_provider
+            anonymous: ~
+
+        main:
+            pattern: ^/
+            stateless: true
+            simple_preauth:
+                authenticator: auth_token_authenticator
+            provider: auth_token_user_provider
+            anonymous: ~
+
+    encoders:
+        AppBundle\Entity\ApiUser:
+            algorithm: bcrypt
+            cost: 12
+
+        AppBundle\Entity\Membres:
+            algorithm: bcrypt
+            cost: 12

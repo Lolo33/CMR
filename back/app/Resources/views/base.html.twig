@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" />
+        <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+        <link href="{{ asset("assets/icons/font/flaticon.css") }}" rel="stylesheet" />
+        <link href="{{ asset("assets/css/jquery-ui.min.css") }}" rel="stylesheet" />
+        <script src="{{ asset('assets/js/jquery-1.12.1.min.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.nicescroll-3.7.6/jquery.nicescroll.js') }}"></script>
+        <script src="{{ asset('assets/js/spinner.js') }}"></script>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+        <div id="menu">
+            {% block menu %}{% endblock %}
+        </div>
+        <div id="body-index">
+            <div id="waiting" style="display: none;"><div id="spinner"></div></div>
+            {% block body %}{% endblock %}
+        </div>
+        <script type="text/javascript">
+            $("html").niceScroll();
+            $("#menu").niceScroll();
+        </script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

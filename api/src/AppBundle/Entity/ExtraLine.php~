@@ -1,0 +1,136 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ExtraLine
+ *
+ * @ORM\Table(name="extra_line")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ExtraLineRepository")
+ */
+class ExtraLine
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="text", type="string", length=255)
+     */
+    private $text;
+
+    /**
+     * @var Order
+     *
+     * @ORM\ManyToOne(targetEntity="Order")
+     */
+    private $orderConcerned;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="value", type="float")
+     */
+    private $value;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="is_restaurant", type="boolean")
+     */
+    private $isRestaurant;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $text
+     *
+     * @return ExtraLine
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * Set orderConcerned
+     *
+     * @param string $orderConcerned
+     *
+     * @return ExtraLine
+     */
+    public function setOrderConcerned($orderConcerned)
+    {
+        $this->orderConcerned = $orderConcerned;
+
+        return $this;
+    }
+
+    /**
+     * Get orderConcerned
+     *
+     * @return string
+     */
+    public function getOrderConcerned()
+    {
+        return $this->orderConcerned;
+    }
+
+    /**
+     * Set value
+     *
+     * @param float $value
+     *
+     * @return ExtraLine
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get value
+     *
+     * @return float
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+}
+

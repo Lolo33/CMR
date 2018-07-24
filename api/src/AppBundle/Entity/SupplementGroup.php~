@@ -1,0 +1,104 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SupplementGroup
+ *
+ * @ORM\Table(name="supplement_group")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SupplementGroupRepository")
+ */
+class SupplementGroup
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Restaurant")
+     */
+    private $restaurant;
+
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="Supplement", mappedBy="supGroup")
+     */
+    private $supplements;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return SupplementGroup
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set restaurant
+     *
+     * @param string $restaurant
+     *
+     * @return SupplementGroup
+     */
+    public function setRestaurant($restaurant)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant
+     *
+     * @return string
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
+    }
+}
+

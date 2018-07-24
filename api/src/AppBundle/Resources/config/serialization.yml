@@ -1,0 +1,652 @@
+AppBundle\Entity\ApiUser:
+    attributes:
+        id:
+            groups: ['userApi', 'auth-token']
+        userClientId:
+            groups: ['userApi', 'auth-token']
+
+AppBundle\Entity\UserKey:
+    attributes:
+        id:
+            groups: ['auth-token']
+        value:
+            groups: ['auth-token']
+        createdAt:
+            groups: ['auth-token']
+        apiUser:
+            groups: ['auth-token']
+
+AppBundle\Entity\Business:
+    attributes:
+        id:
+            groups: ['restaurants', "orders"]
+        name:
+            groups: ['restaurants', "orders"]
+
+AppBundle\Entity\Table:
+    attributes:
+        id:
+            groups: ["booking", 'restaurants', "tables"]
+        tableNumber:
+            groups: ["booking", 'restaurants', "tables"]
+        numberOfPersons:
+            groups: ["booking", 'restaurants', "tables"]
+        isActive:
+            groups: ["booking", 'restaurants', "tables"]
+        bookingList:
+            groups: ["tables"]
+
+AppBundle\Entity\Service:
+    attributes:
+        id:
+            groups: ["booking", 'restaurants']
+        hourStart:
+            groups: ["booking", 'restaurants']
+        hourEnd:
+            groups: ["booking", 'restaurants']
+        fixedTime:
+            groups: ["booking", 'restaurants']
+
+AppBundle\Entity\BookingBloc:
+    attributes:
+        status:
+            groups: ["booking"]
+        booking:
+            groups: ["booking"]
+        duration:
+            groups: ["booking"]
+        ratio:
+            groups: ["booking"]
+        heure_debut:
+            groups: ["booking"]
+        heure_fin:
+            groups: ["booking"]
+
+AppBundle\Entity\Booking:
+    attributes:
+        id:
+            groups: ["booking", "tables"]
+        reference:
+            groups: ["booking", "tables"]
+        clientName:
+            groups: ["booking", "tables"]
+        clientTel:
+            groups: ["booking", "tables"]
+        hour:
+            groups: ["booking", "tables"]
+        nbOfPersons:
+            groups: ["booking", "tables"]
+        status:
+            groups: ["booking", "tables"]
+        type:
+            groups: ["booking", "tables"]
+        assignedTable:
+            groups: ["booking"]
+
+AppBundle\Entity\BookingStatus:
+    attributes:
+        id:
+            groups: ["booking", "tables"]
+        name:
+            groups: ["booking", "tables"]
+
+AppBundle\Entity\BookingType:
+    attributes:
+        id:
+            groups: ["booking", "tables"]
+        name:
+            groups: ["booking", "tables"]
+
+AppBundle\Entity\TypeOfCuisine:
+    attributes:
+        id:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery']
+        name:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery']
+
+AppBundle\Entity\CorporateStatus:
+    attributes:
+        id:
+            groups: ['restaurants', "orders"]
+        status:
+            groups: ['restaurants', "orders"]
+
+AppBundle\Entity\Country:
+    attributes:
+        id:
+            groups: ['restaurants', 'restaurants-delivery', "orders", 'restaurant', 'restaurant-delivery', "country-list"]
+        name:
+            groups: ['restaurants', 'restaurants-delivery', "orders", 'restaurant', 'restaurant-delivery', "country-list"]
+        code:
+            groups: ['restaurants', 'restaurants-delivery', "orders", 'restaurant', 'restaurant-delivery', "country-list"]
+        nbRestaurants:
+            groups: ['restaurants-dpt']
+        nbRestaurantsAccepted:
+            groups: ['restaurants-dpt']
+        departementsList:
+            groups: ['restaurants-dpt']
+
+AppBundle\Entity\Departement:
+    attributes:
+        id:
+            groups: ['restaurants', 'restaurant', 'restaurants-dpt']
+        code:
+            groups: ['restaurants', 'restaurant', 'restaurants-dpt']
+        name:
+            groups: ['restaurants', 'restaurant', 'restaurants-dpt']
+        nbRestaurants:
+            groups: ['restaurants', 'restaurants-dpt']
+        nbRestaurantsAccepted:
+            groups: ['restaurants', 'restaurants-dpt']
+        townsList:
+            groups: ['restaurants-dpt']
+
+AppBundle\Entity\Currency:
+    attributes:
+        id:
+            groups: ['restaurants', "orders", 'restaurant']
+        name:
+            groups: ['restaurants', "orders", 'restaurant']
+        currencyCode:
+            groups: ['restaurants', "orders", 'restaurant']
+
+AppBundle\Entity\Product:
+    attributes:
+        id:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        name:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        description:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        category:
+            groups: []
+        propertiesList:
+            groups: ['restaurant', 'restaurant-delivery']
+        supplementsList:
+            groups: ['restaurant', 'restaurant-delivery']
+        price:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        imgUrl:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        position:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        properties:
+            groups: []
+        supplements:
+            groups: []
+        isActive:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        isSoldOut:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        isTakeAwayAuthorized:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+
+AppBundle\Entity\PropertyCategory:
+    attributes:
+        id:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        name:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        restaurant:
+            groups: []
+        optionsList:
+            groups: ['restaurants', 'restaurant', 'restaurant-delivery']
+
+AppBundle\Entity\ProductPropertyCategory:
+    attributes:
+        id:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        optionGroup:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        position:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+
+AppBundle\Entity\ProductSupplementCategory:
+    attributes:
+        id:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+        supGroup:
+            groups: ['restaurants', "orders", 'restaurant', 'restaurant-delivery']
+
+
+AppBundle\Entity\Property:
+    attributes:
+        id:
+            groups: ['restaurants', 'orders', 'restaurant', 'restaurant-delivery']
+        name:
+             groups: ['restaurants', 'orders', 'restaurant', 'restaurant-delivery']
+        optionGroup:
+            groups: ["orders"]
+        price:
+            groups: ['restaurants', 'orders', 'restaurant', 'restaurant-delivery']
+
+AppBundle\Entity\OrderStatusHour:
+    attributes:
+        id:
+            groups: ['orders', 'restaurants']
+        order:
+            groups: []
+        status:
+            groups: ['orders', 'restaurants']
+        hour:
+            groups: ['orders', 'restaurants']
+        current:
+            groups: ["orders", 'restaurants']
+
+
+AppBundle\Entity\OrderProduct:
+    attributes:
+        referenceKey:
+            groups: ['orders']
+        order:
+            groups: []
+        product:
+            groups: ['orders']
+        totalPrice:
+            groups: ['orders']
+        propertiesList:
+            groups: ['orders']
+        supplementsList:
+            groups: ['orders']
+
+
+AppBundle\Entity\OrderStatus:
+    attributes:
+        id:
+            groups: ['orders', 'restaurants']
+        name:
+            groups: ['orders', 'restaurants']
+
+AppBundle\Entity\OrderType:
+    attributes:
+        id:
+            groups: ['orders', 'restaurants']
+        name:
+            groups: ['orders', 'restaurants']
+
+AppBundle\Entity\Order:
+    attributes:
+        id:
+            groups: ['orders']
+        reference:
+            groups: ["orders"]
+        restaurant:
+            groups: ['orders']
+        type:
+            groups: ['orders']
+        status:
+            groups: ['orders']
+        clientName:
+            groups: ['orders']
+        clientPhone:
+            groups: ['orders']
+        clientAddressLine1:
+            groups: ['orders']
+        clientAddressLine2:
+            groups: ['orders']
+        clientTown:
+            groups: ['orders']
+        hourToBeReady:
+            groups: ["orders"]
+        precisions:
+            groups: ['orders']
+        productsList:
+            groups: ["orders"]
+        missingParams:
+            groups: ["orders"]
+        TotalHT:
+            groups: ['orders']
+        TotalTTC:
+            groups: ['orders']
+        deliveryFee:
+            groups: ['orders']
+        extraLinesList:
+            groups: ["orders"]
+        restaurantAmountToCash:
+            groups: ["orders"]
+        amountTakenByBusiness:
+            groups: ["orders"]
+
+AppBundle\Entity\Utils\MissingParam:
+    attributes:
+        code:
+            groups: ['orders']
+        text:
+            groups: ['orders']
+        params:
+            groups: ['orders']
+
+AppBundle\Entity\ExtraLine:
+    attributes:
+        id:
+            groups: ['orders']
+        text:
+            groups: ['orders']
+        orderConcerned:
+            groups: []
+        value:
+            groups: ['orders']
+
+AppBundle\Entity\ScheduleFormatted:
+    attributes:
+        hourOpening:
+            groups: ["schedules", 'restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery']
+        hourClosing:
+            groups: ["schedules", 'restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery']
+
+AppBundle\Entity\ScheduleBooking:
+    attributes:
+        id:
+            groups: ["schedules", 'restaurants']
+        restaurant:
+            groups: []
+        dayOpening:
+            groups: ["schedules", 'restaurants']
+        hourOpening:
+            groups: ["schedules", 'restaurants']
+        dayClosing:
+            groups: ["schedules", 'restaurants']
+        hourClosing:
+            groups: ["schedules", 'restaurants']
+        hourStatus:
+            groups: []
+
+AppBundle\Entity\ScheduleDelivery:
+    attributes:
+        id:
+            groups: []
+        restaurant:
+            groups: []
+        dayOpening:
+            groups: []
+        hourOpening:
+            groups: ["schedules", 'restaurants', 'restaurant']
+        dayClosing:
+            groups: []
+        hourClosing:
+            groups: ["schedules", 'restaurants', 'restaurant']
+        hourStatus:
+            groups: []
+
+AppBundle\Entity\ScheduleOrder:
+    attributes:
+        id:
+            groups: ["schedules", 'restaurants']
+        restaurant:
+            groups: []
+        dayOpening:
+            groups: ["schedules", 'restaurants']
+        hourOpening:
+            groups: ["schedules", 'restaurants']
+        dayClosing:
+            groups: ["schedules", 'restaurants']
+        hourClosing:
+            groups: ["schedules", 'restaurants']
+        hourStatus:
+            groups: []
+
+AppBundle\Entity\ProductCategory:
+    attributes:
+        id:
+            groups: ['restaurants', 'restaurant', 'restaurant-delivery']
+        name:
+            groups: ['restaurants', 'restaurant', 'restaurant-delivery']
+        description:
+            groups: ['restaurants', 'restaurant', 'restaurant-delivery']
+        restaurant:
+            groups: []
+        productsList:
+            groups: ['restaurants', 'restaurant', 'restaurant-delivery']
+        isActive:
+            groups: ['restaurants', 'restaurant', 'restaurant-delivery']
+
+AppBundle\Entity\Restaurant:
+    attributes:
+        id:
+            groups: ['restaurant', 'restaurant-delivery', 'restaurants', 'restaurants-delivery', "orders"]
+        name:
+            groups: ['restaurant', 'restaurant-delivery', "restaurants", 'restaurants-delivery']
+        isOpen:
+            groups: ['restaurant', 'restaurant-delivery', "restaurants", 'restaurants-delivery']
+        openStateString:
+            groups: ['restaurant', 'restaurant-delivery', "restaurants", 'restaurants-delivery']
+        deliverHimself:
+            groups: ['restaurant', 'restaurant-delivery']
+        logoUrl:
+            groups: ['restaurant', 'restaurant-delivery', 'restaurants', 'restaurants-delivery']
+        phoneNumber:
+            groups: ['restaurant', 'restaurant-delivery', 'restaurants', 'restaurants-delivery']
+        mail:
+            groups: ['restaurant', 'restaurant-delivery', 'restaurants', 'restaurants-delivery']
+        website:
+            groups: ['restaurant', 'restaurant-delivery', 'restaurants', 'restaurants-delivery']
+        chiefImg:
+            groups: ['restaurant', 'restaurant-delivery']
+        description:
+            groups: ['restaurant', 'restaurant-delivery']
+        addressLine1:
+            groups: ['restaurant', "restaurants", 'restaurants-delivery']
+        addressLine2:
+            groups: ['restaurant', "restaurants", 'restaurants-delivery']
+        town:
+            groups: ['restaurant', "restaurants", 'restaurants-delivery']
+        region:
+            groups: []
+        state:
+            groups: []
+        status:
+            groups: []
+        currency:
+            groups: ['restaurant','restaurant-delivery', "restaurants", 'restaurants-delivery']
+        type:
+            groups: ['restaurant', 'restaurant-delivery', "restaurants", 'restaurants-delivery']
+        active:
+            groups: []
+        categoriesOfProducts:
+            groups: ['restaurant', 'restaurant-delivery']
+        menus:
+            groups: []
+        supplementGroups:
+            groups: ['restaurant', 'restaurant-delivery']
+        scheduleList:
+            groups: []
+        scheduleDeliveryList:
+            groups: []
+        townsDeliveredList:
+            groups: ['restaurant-delivery']
+        deliveryFees:
+            groups: ['restaurant-delivery', 'restaurants-delivery']
+        scheduleOrderList:
+            groups: []
+        bookingDuration:
+            groups: []
+        timeToDelivery:
+            groups: ['restaurant-delivery', 'restaurants-delivery']
+        marginDelivery:
+            groups: ['restaurant-delivery', 'restaurants-delivery']
+        ordersList:
+            groups: []
+        logoUrl:
+            groups: ['restaurant', 'restaurant-delivery', 'restaurants', 'restaurants-delivery']
+        chiefImg:
+            groups: ['restaurant', 'restaurant-delivery', 'restaurants', 'restaurants-delivery']
+        realHours:
+            groups: ['restaurant', 'restaurant-delivery', 'restaurants', 'restaurants-delivery']
+        paymentModes:
+            groups: ['restaurant', 'restaurant-delivery', 'restaurants', 'restaurants-delivery']
+        imagesList:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery']
+        distanceFromPoint:
+            groups: ['restaurants']
+
+
+AppBundle\Entity\RestaurantImage:
+    attributes:
+        id:
+            groups: ['restaurant', 'restaurant-delivery', 'restaurants', 'restaurants-delivery']
+        url:
+            groups: ['restaurant', 'restaurant-delivery', 'restaurants', 'restaurants-delivery']
+
+AppBundle\Entity\PaymentMode:
+    attributes:
+        id:
+            groups: ['restaurant-delivery', 'restaurant', 'restaurants', 'restaurants-delivery']
+        modeName:
+            groups: ['restaurant-delivery', 'restaurant', 'restaurants', 'restaurants-delivery']
+        modeCode:
+            groups: ['restaurant-delivery', 'restaurant', 'restaurants', 'restaurants-delivery']
+
+
+
+AppBundle\Entity\Town:
+    attributes:
+        id:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery', "orders", 'restaurants-dpt']
+        codeINSEE:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery', "orders", 'restaurants-dpt']
+        name:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery', "orders", 'restaurants-dpt']
+        countryCode:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery', "orders", 'restaurants-dpt']
+        country:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery', "orders", 'restaurants-dpt']
+        nbRestaurants:
+            groups: ['restaurants-dpt']
+        nbRestaurantsAccepted:
+            groups: ['restaurants-dpt']
+
+AppBundle\Entity\DeliveryFee:
+    attributes:
+        id:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery']
+        minOrder:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery']
+        restaurant:
+            groups: []
+        deliveryTown:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery']
+        deliveryFee:
+            groups: ['restaurants', 'restaurants-delivery', 'restaurant', 'restaurant-delivery']
+
+AppBundle\Entity\OrderMenuProduct:
+    attributes:
+        id:
+            groups: ['restaurants', 'orders']
+        orderMenu:
+            groups: []
+        product:
+            groups: ['restaurants', 'orders']
+        properties:
+            groups: ['restaurants', 'orders']
+        supplements:
+            groups: ['restaurants', 'orders']
+
+AppBundle\Entity\OrderMenu:
+    attributes:
+        id:
+            groups: ['restaurants', 'orders']
+        menu:
+            groups: ['restaurants', 'orders']
+        order:
+            groups: []
+        productsList:
+            groups: ['restaurants', 'orders']
+        size:
+            groups: ['restaurants', 'orders']
+
+AppBundle\Entity\Menu:
+    attributes:
+        id:
+            groups: ['restaurants', 'orders', 'restaurant']
+        name:
+            groups: ['restaurants', 'orders', 'restaurant']
+        price:
+            groups: ['restaurants', 'orders', 'restaurant']
+        restaurant:
+            groups: []
+        menuSizes:
+            groups: ['restaurants', 'orders', 'restaurant']
+
+AppBundle\Entity\MenuSize:
+    attributes:
+        id:
+            groups: ['restaurants', 'orders', 'restaurant']
+        name:
+            groups: ['restaurants', 'orders', 'restaurant']
+        description:
+            groups: ['restaurants', 'orders', 'restaurant']
+        menuOptionsList:
+            groups: ['restaurants', 'orders', 'restaurant']
+
+AppBundle\Entity\MenuOption:
+    attributes:
+        id:
+            groups: ['restaurants', 'orders', 'restaurant']
+        name:
+            groups: ['restaurants', 'orders', 'restaurant']
+        menu:
+            groups: []
+        productsList:
+            groups: ['restaurants', 'orders', 'restaurant']
+        position:
+            groups: ['restaurants', 'orders', 'restaurant']
+
+
+AppBundle\Entity\MenuOptionProduct:
+    attributes:
+        id:
+            groups: ['restaurants', 'restaurant']
+        product:
+            groups: ['restaurants', 'restaurant']
+        menuOption:
+            groups: []
+        price:
+            groups: ['restaurants', 'restaurant']
+        properties:
+            groups: ['restaurants', 'restaurant']
+
+
+AppBundle\Entity\SupplementCategory:
+    attributes:
+        id:
+            groups: ['restaurants', 'orders', 'restaurant', 'restaurant-delivery']
+        name:
+            groups: ['restaurants', 'orders', 'restaurant', 'restaurant-delivery']
+        restaurant:
+            groups: []
+        supplements:
+            groups: ['restaurants', 'restaurant', 'restaurant-delivery']
+
+AppBundle\Entity\Supplement:
+    attributes:
+        id:
+            groups: ['restaurants', 'orders', 'restaurant', 'restaurant-delivery']
+        name:
+            groups: ['restaurants', 'orders', 'restaurant', 'restaurant-delivery']
+        supGroup:
+            groups: ['orders']
+        price:
+            groups: ['restaurants', 'orders', 'restaurant', 'restaurant-delivery']
+
+
+AppBundle\Entity\RestaurantUser:
+    attributes:
+        id:
+            groups: ['restaurants']
+        username:
+            groups: ['restaurants']
+        password:
+            groups: ['restaurants']
+        email:
+            groups: ['restaurants']
+        rank:
+            groups: ['restaurants']
+        restaurant:
+            groups: ['restaurants']
+
+AppBundle\Entity\RestaurantUserRank:
+    attributes:
+        id:
+            groups: ['restaurants']
+        name:
+            groups: ['restaurants']

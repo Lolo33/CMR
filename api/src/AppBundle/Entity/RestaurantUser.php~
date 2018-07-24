@@ -1,0 +1,474 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\User as BaseUser;
+
+/**
+ * RestaurantUser
+ *
+ *
+ * @ORM\Table(name="restaurant_user")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\RestaurantUserRepository")
+ */
+class RestaurantUser extends BaseUser
+{
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_USER = 'ROLE_USER';
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var RestaurantUserRank
+     *
+     * @ORM\ManyToOne(targetEntity="RestaurantUserRank")
+     */
+    protected $rank;
+
+    /**
+     * @var Restaurant
+     *
+     *  @ORM\ManyToOne(targetEntity="Restaurant")
+     */
+    protected $restaurant;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="is_info_valid", type="boolean", options={"default" : false})
+     */
+    private $isInfoValid;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="is_schedule_valid", type="boolean", options={"default" : false})
+     */
+    private $isScheduleValid;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="is_card_valid", type="boolean", options={"default" : false})
+     */
+    private $isCardValid;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="is_town_valid", type="boolean", options={"default" : false})
+     */
+    private $isTownValid;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="is_partner_valid", type="boolean", options={"default" : false})
+     */
+    private $isPartnerValid;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="is_payment_valid", type="boolean", options={"default" : false})
+     */
+    private $isPaymentValid;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="is_order_valid", type="boolean", options={"default" : false})
+     */
+    private $isOrderValid;
+
+    /**
+     * @var int
+     *
+     * @ORM\ManyToOne(targetEntity="Route")
+     */
+    private $defaultRedirection;
+
+    /**
+     * @var RestaurantUser
+     *
+     * @ORM\OneToMany(targetEntity="RouteBlackList", mappedBy="user")
+     */
+    private $routesBlackListed;
+
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return RestaurantUser
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return RestaurantUser
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return RestaurantUser
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set rank
+     *
+     * @param string $rank
+     *
+     * @return RestaurantUser
+     */
+    public function setRank($rank)
+    {
+        $this->rank = $rank;
+
+        return $this;
+    }
+
+    /**
+     * Get rank
+     *
+     * @return string
+     */
+    public function getRank()
+    {
+        return $this->rank;
+    }
+
+    /**
+     * Set restaurant
+     *
+     * @param string $restaurant
+     *
+     * @return RestaurantUser
+     */
+    public function setRestaurant($restaurant)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant
+     *
+     * @return string
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
+    }
+
+    /**
+     * Set isCardValid
+     *
+     * @param boolean $isCardValid
+     *
+     * @return RestaurantUser
+     */
+    public function setIsCardValid($isCardValid)
+    {
+        $this->isCardValid = $isCardValid;
+
+        return $this;
+    }
+
+    /**
+     * Get isCardValid
+     *
+     * @return boolean
+     */
+    public function getIsCardValid()
+    {
+        return $this->isCardValid;
+    }
+
+    /**
+     * Set isScheduleValid
+     *
+     * @param boolean $isScheduleValid
+     *
+     * @return RestaurantUser
+     */
+    public function setIsScheduleValid($isScheduleValid)
+    {
+        $this->isScheduleValid = $isScheduleValid;
+
+        return $this;
+    }
+
+    /**
+     * Get isScheduleValid
+     *
+     * @return boolean
+     */
+    public function getIsScheduleValid()
+    {
+        return $this->isScheduleValid;
+    }
+
+    /**
+     * Add routesBlackListed
+     *
+     * @param \AppBundle\Entity\Route $routesBlackListed
+     *
+     * @return RestaurantUser
+     */
+    public function addRoutesBlackListed(\AppBundle\Entity\Route $routesBlackListed)
+    {
+        $this->routesBlackListed[] = $routesBlackListed;
+
+        return $this;
+    }
+
+    /**
+     * Remove routesBlackListed
+     *
+     * @param \AppBundle\Entity\Route $routesBlackListed
+     */
+    public function removeRoutesBlackListed(\AppBundle\Entity\Route $routesBlackListed)
+    {
+        $this->routesBlackListed->removeElement($routesBlackListed);
+    }
+
+    /**
+     * Get routesBlackListed
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRoutesBlackListed()
+    {
+        return $this->routesBlackListed;
+    }
+
+    /**
+     * Set isValidRegister
+     *
+     * @param boolean $isValidRegister
+     *
+     * @return RestaurantUser
+     */
+    public function setIsValidRegister($isValidRegister)
+    {
+        $this->isValidRegister = $isValidRegister;
+
+        return $this;
+    }
+
+    /**
+     * Get isValidRegister
+     *
+     * @return boolean
+     */
+    public function getIsValidRegister()
+    {
+        return $this->isValidRegister;
+    }
+
+
+    /**
+     * Set defaultRedirection
+     *
+     * @param \AppBundle\Entity\Route $defaultRedirection
+     *
+     * @return RestaurantUser
+     */
+    public function setDefaultRedirection(\AppBundle\Entity\Route $defaultRedirection = null)
+    {
+        $this->defaultRedirection = $defaultRedirection;
+
+        return $this;
+    }
+
+    /**
+     * Get defaultRedirection
+     *
+     * @return \AppBundle\Entity\Route
+     */
+    public function getDefaultRedirection()
+    {
+        return $this->defaultRedirection;
+    }
+
+    /**
+     * Set isInfoValid
+     *
+     * @param boolean $isInfoValid
+     *
+     * @return RestaurantUser
+     */
+    public function setIsInfoValid($isInfoValid)
+    {
+        $this->isInfoValid = $isInfoValid;
+
+        return $this;
+    }
+
+    /**
+     * Get isInfoValid
+     *
+     * @return boolean
+     */
+    public function getIsInfoValid()
+    {
+        return $this->isInfoValid;
+    }
+
+    /**
+     * Set isPartnerValid
+     *
+     * @param boolean $isPartnerValid
+     *
+     * @return RestaurantUser
+     */
+    public function setIsPartnerValid($isPartnerValid)
+    {
+        $this->isPartnerValid = $isPartnerValid;
+
+        return $this;
+    }
+
+    /**
+     * Get isPartnerValid
+     *
+     * @return boolean
+     */
+    public function getIsPartnerValid()
+    {
+        return $this->isPartnerValid;
+    }
+
+    /**
+     * Set isPaymentValid
+     *
+     * @param boolean $isPaymentValid
+     *
+     * @return RestaurantUser
+     */
+    public function setIsPaymentValid($isPaymentValid)
+    {
+        $this->isPaymentValid = $isPaymentValid;
+
+        return $this;
+    }
+
+    /**
+     * Get isPaymentValid
+     *
+     * @return boolean
+     */
+    public function getIsPaymentValid()
+    {
+        return $this->isPaymentValid;
+    }
+
+    /**
+     * Set isOrderValid
+     *
+     * @param boolean $isOrderValid
+     *
+     * @return RestaurantUser
+     */
+    public function setIsOrderValid($isOrderValid)
+    {
+        $this->isOrderValid = $isOrderValid;
+
+        return $this;
+    }
+
+    /**
+     * Get isOrderValid
+     *
+     * @return boolean
+     */
+    public function getIsOrderValid()
+    {
+        return $this->isOrderValid;
+    }
+}

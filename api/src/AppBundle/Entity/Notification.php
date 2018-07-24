@@ -1,0 +1,281 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Notification
+ *
+ * @ORM\Table(name="notification")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\NotificationRepository")
+ */
+class Notification
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="text", type="string", length=255)
+     */
+    private $text;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="NotificationType")
+     */
+    private $type;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="isSeen", type="boolean")
+     */
+    private $isSeen;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="isShown", type="boolean")
+     */
+    private $isShown;
+
+    /**
+     * @var Route
+     *
+     * @ORM\ManyToOne(targetEntity="Route")
+     */
+    private $redirectRoute;
+
+    /**
+     * @var bool
+     *
+     * @ORM\ManyToOne(targetEntity="Restaurant")
+     */
+    private $restaurant;
+
+    /**
+     * @var Order
+     *
+     * @ORM\ManyToOne(targetEntity="Order")
+     */
+    private $order;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="sent_at", type="datetime")
+     */
+    private $sentAt;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $text
+     *
+     * @return Notification
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Notification
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set isSeen
+     *
+     * @param boolean $isSeen
+     *
+     * @return Notification
+     */
+    public function setIsSeen($isSeen)
+    {
+        $this->isSeen = $isSeen;
+
+        return $this;
+    }
+
+    /**
+     * Get isSeen
+     *
+     * @return bool
+     */
+    public function getIsSeen()
+    {
+        return $this->isSeen;
+    }
+
+    /**
+     * Set redirectRoute
+     *
+     * @param string $redirectRoute
+     *
+     * @return Notification
+     */
+    public function setRedirectRoute($redirectRoute)
+    {
+        $this->redirectRoute = $redirectRoute;
+
+        return $this;
+    }
+
+    /**
+     * Get redirectRoute
+     *
+     * @return string
+     */
+    public function getRedirectRoute()
+    {
+        return $this->redirectRoute;
+    }
+
+    /**
+     * Set sentAt
+     *
+     * @param \DateTime $sentAt
+     *
+     * @return Notification
+     */
+    public function setSentAt($sentAt)
+    {
+        $this->sentAt = $sentAt;
+
+        return $this;
+    }
+
+    /**
+     * Get sentAt
+     *
+     * @return \DateTime
+     */
+    public function getSentAt()
+    {
+        return $this->sentAt;
+    }
+
+    /**
+     * Set restaurant
+     *
+     * @param \AppBundle\Entity\Restaurant $restaurant
+     *
+     * @return Notification
+     */
+    public function setRestaurant(\AppBundle\Entity\Restaurant $restaurant = null)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant
+     *
+     * @return \AppBundle\Entity\Restaurant
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
+    }
+
+    /**
+     * Set isShown
+     *
+     * @param boolean $isShown
+     *
+     * @return Notification
+     */
+    public function setIsShown($isShown)
+    {
+        $this->isShown = $isShown;
+
+        return $this;
+    }
+
+    /**
+     * Get isShown
+     *
+     * @return boolean
+     */
+    public function getIsShown()
+    {
+        return $this->isShown;
+    }
+
+    /**
+     * Set order
+     *
+     * @param \AppBundle\Entity\Order $order
+     *
+     * @return Notification
+     */
+    public function setOrder(\AppBundle\Entity\Order $order = null)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return \AppBundle\Entity\Order
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+}

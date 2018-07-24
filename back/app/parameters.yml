@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: db741601789.db.1and1.com
+    database_port: 3306
+    database_name: db741601789
+    database_user: dbo741601789
+    database_password: Mate-maker33!
+    mailer_transport: smtp
+    mailer_host: in-v3.mailjet.com
+    mailer_user: bbe7791eafdc50b5f065a49f19fe5dfa
+    mailer_password: c421b84dfb234768ba81575e7b1c9020
+    secret: fa0330b795d0054f7091a24d0c22ee14a2c66ef3

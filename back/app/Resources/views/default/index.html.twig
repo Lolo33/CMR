@@ -1,0 +1,169 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        .item {
+            background: #efd9ba;
+            border-radius: 5px;
+        }
+        .sous-item, .sous-sous-item {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sous-sous-item {
+            padding-left: 10px;
+        }
+        .sous-item a {
+            display: block;
+            width: 100%;
+            margin: 0;
+            padding: 2px;
+            color: black;
+            background: #fbeed5;
+        }
+        .nav-stacked a:hover, .nav-stacked a:focus {
+            background: #f1a899;
+        }
+        .sous-item a:hover, .sous-item a:focus{
+            background: #f8e5be;
+            text-decoration: none;
+        }
+        .nav-stacked .sous-sous-item a {
+            background: white;
+        }
+        .nav-stacked .sous-sous-item a:hover, .nav-stacked .sous-sous-item a:focus {
+            background: #f8e5be;
+        }
+        .titre-nav {
+            background: orangered;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            margin: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block menu %}
+    <h1 class="titre-nav">Structures</h1>
+    <ul class="nav nav-pills nav-stacked">
+        {% for type in structuresTypes %}
+            <li class="item">
+                <a href="#" data-toggle="collapse" data-target="#struct-type-{{ type.id }}">
+                    {{ type.typeName }} <span class="caret"></span>
+                </a>
+                <ul class="sous-item in" id="struct-type-{{ type.id }}">
+                    {% for structure in type.structuresList %}
+                        <li data-toggle="collapse" data-target="#inter-struct-{{ structure.id }}" id="struct-{{ structure.id }}">
+                            <a href="#">{{ structure.name }} <span class="caret"></span></a>
+                        </li>
+                            <div id="inter-struct-{{ structure.id }}" class="in">
+                                <ul  class="sous-sous-item">
+                                {% for interlocutor in structure.interlocutorsList %}
+                                    <li class="clic-contact" id="inter-{{ interlocutor.id }}">
+                                        <a href="#">{{ interlocutor.name }} ({{ interlocutor.role }})</a>
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="text-center" style="margin-top: 20px;">
+        <a href="#">
+            <button class="btn-primary"><span class="glyphicon glyphicon-plus-circle"></span> Ajouter un interlocuteur</button>
+        </a>
+    </div>
+{% endblock %}
+
+
+{% block body %}
+    <div id="conteneur-body">
+        <h1>Ajouter un type de structure</h1>
+        {{ form_start(formStructuresType) }}
+        {{ form_widget(formStructuresType.typeName, {"attr": {"placeholder": "Nom du type de structure", "class": "form-control"}}) }}
+        <div class="zone-btn">
+            <button class="btn btn-success" type="submit">Ajouter ce type de structure</button>
+        </div>
+        {{ form_end(formStructuresType) }}
+        <hr>
+        <h1>Ajouter une structure</h1>
+        {{ form_start(formStructures) }}
+        {{ form_widget(formStructures.type, {"attr": {"placeholder": "Type de structure", "class": "form-control"}}) }}
+        {{ form_widget(formStructures.name, {"attr": {"placeholder": "Nom de la structure", "class": "form-control"}}) }}
+        <div class="zone-btn">
+            <button class="btn btn-success" type="submit">Ajouter cette structure</button>
+        </div>
+        {{ form_end(formStructures) }}
+        <h1>Ajouter un Interlocuteur</h1>
+        {{ form_start(formInterlocutor) }}
+        <div class="row">
+            <div class="col-lg-6">
+                {{ form_widget(formInterlocutor.mail, {"attr": {"placeholder": "Adresse mail de l'interlocuteur", "class": "form-control"}}) }}
+            </div>
+            <div class="col-lg-6">
+                {{ form_widget(formInterlocutor.telephone, {"attr": {"placeholder": "Numéro de télephone de l'interlocuteur", "class": "form-control"}}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                {{ form_widget(formInterlocutor.interlocutor.name, {"attr": {"placeholder": "Nom et prénom de l'interlocuteur", "class": "form-control"}}) }}
+            </div>
+            <div class="col-lg-6">
+                {{ form_widget(formInterlocutor.interlocutor.role, {"attr": {"placeholder": "Role dans la structure", "class": "form-control"}}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                {{ form_widget(formInterlocutor.interlocutor.structure, {"attr": {"placeholder": "Nom de la structure", "class": "form-control"}}) }}
+            </div>
+        </div>
+        <div class="zone-btn">
+            <button class="btn btn-success" type="submit">Ajouter cette structure</button>
+        </div>
+        {{ form_end(formInterlocutor) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(".clic-contact").click(function () {
+           var interlocutor = $(this).attr("id").substr(6);
+            var opts = {
+                lines: 13 // The number of lines to draw
+                , length: 28 // The length of each line
+                , width: 14 // The line thickness
+                , radius: 42 // The radius of the inner circle
+                , scale: 1 // Scales overall size of the spinner
+                , corners: 1 // Corner roundness (0..1)
+                , color: 'black' // #rgb or #rrggbb or array of colors
+                , opacity: 0.25 // Opacity of the lines
+                , rotate: 0 // The rotation offset
+                , direction: 1 // 1: clockwise, -1: counterclockwise
+                , speed: 1 // Rounds per second
+                , trail: 60 // Afterglow percentage
+                , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+                , zIndex: 2e9 // The z-index (defaults to 2000000000)
+                , className: 'spinner' // The CSS class to assign to the spinner
+                , top: '50%' // Top position relative to parent
+                , left: '60%' // Left position relative to parent
+                , shadow: false // Whether to render a shadow
+                , hwaccel: false // Whether to use hardware acceleration
+                , position: 'absolute' // Element positioning
+            };
+            var target = document.getElementById('spinner');
+            var spinner = new Spinner(opts).spin(target);
+            $("#waiting").show();
+           $.post("{{ path("history") }}", {interlocutor:interlocutor}, function (data) {
+               $("#conteneur-body").html(data).slideDown();
+               spinner.stop();
+               $("#waiting").hide()
+           });
+            //
+        });
+    </script>
+
+{% endblock %}

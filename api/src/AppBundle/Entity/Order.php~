@@ -1,0 +1,789 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Order
+ *
+ * @ORM\Table(name="`order`")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OrdersRepository")
+ */
+class Order
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Restaurant", inversedBy="ordersList")
+     */
+    private $restaurant;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="precisions", type="text", nullable=true)
+     */
+    private $precisions;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="client_name", type="string", length=255, nullable=true)
+     */
+    private $clientName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="client_phone", type="string", length=10, nullable=true)
+     */
+    private $clientPhone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="client_adress_l1", type="string", length=255, nullable=true)
+     */
+    private $clientAddressLine1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="client_adress_l2", type="string", length=255, nullable=true)
+     */
+    private $clientAddressLine2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="client_country_code", type="string", length=10, nullable=true)
+     */
+    private $clientCountryCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="client_city", type="string", length=255, nullable=true)
+     */
+    private $clientCity;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Town")
+     */
+    private $clientTown;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="restaurant_comments", type="text", nullable=true)
+     */
+    private $restaurantComments;
+
+    /**
+     * @var OrderType
+     *
+     * @ORM\ManyToOne(targetEntity="OrderType")
+     */
+    private $type;
+
+    /**
+     * @var OrderStatusHour
+     *
+     * @ORM\OneToMany(targetEntity="OrderStatusHour", mappedBy="order")
+     */
+    private $statusList;
+
+    /**
+     * @var Product[]
+     *
+     * @ORM\ManyToOne(targetEntity="Business", inversedBy="ordersList")
+     */
+    private $business;
+
+    /**
+     * @var Product[]
+     *
+     * @ORM\OneToMany(targetEntity="OrderProduct", mappedBy="order")
+     */
+    private $productsList;
+
+    /**
+     * @var Product[]
+     *
+     * @ORM\OneToMany(targetEntity="OrderMenu", mappedBy="order")
+     */
+    private $menusList;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="hourToBeReady", type="datetime", nullable=true)
+     */
+    private $hourToBeReady;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reference", type="string", length=255)
+     */
+    private $reference;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="amount_taken_by_buisness", type="float", nullable=true)
+     */
+    private $amountTakenByBusiness;
+
+    /**
+     * @var ExtraLine[]
+     *
+     * @ORM\OneToMany(targetEntity="ExtraLine", mappedBy="orderConcerned")
+     */
+    private $extraLinesList;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_confirmed", type="boolean", options={"default" : false})
+     */
+    private $isConfirmed;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="amount_to_cash", type="float", nullable=true)
+     */
+    private $restaurantAmountToCash;
+
+    /**
+     * @var array
+     */
+    private $missingParams;
+
+
+
+
+    public function getActiveStatus(){
+        if (count($this->statusList)) {
+            foreach ($this->statusList as $status) {
+                if ($status->getCurrent() == true)
+                    return $status;
+            }
+        }
+        return null;
+    }
+
+
+    public function TotalHT(){
+        $prix = 0;
+        if (count($this->productsList) > 0) {
+            foreach ($this->getProductsList() as $orderProduct)
+                $prix += $orderProduct->getPriceHT();
+            if (count($this->extraLinesList) > 0) {
+                foreach ($this->extraLinesList as $extraLine)
+                    $prix += $extraLine->getValue();
+            }
+        }
+        return Globals::formaterPrix(round($prix, 2));
+    }
+
+    public function TotalRestaurantTTC(){
+        $prix = 0;
+        if (count($this->productsList) > 0) {
+            foreach ($this->getProductsList() as $orderProduct)
+                $prix += $orderProduct->getPriceTTC();
+        }
+        return $prix;
+    }
+
+    public function TotalTTC(){
+        $prix = $this->TotalRestaurantTTC();
+        if (count($this->extraLinesList) > 0) {
+            foreach ($this->extraLinesList as $extraLine)
+                $prix += $extraLine->getValue();
+        }
+        return Globals::formaterPrix(round($prix, 2));
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set restaurant
+     *
+     * @param string $restaurant
+     *
+     * @return Order
+     */
+    public function setRestaurant($restaurant)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant
+     *
+     * @return string
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
+    }
+
+    /**
+     * Set precisions
+     *
+     * @param string $precisions
+     *
+     * @return Order
+     */
+    public function setPrecisions($precisions)
+    {
+        $this->precisions = $precisions;
+
+        return $this;
+    }
+
+    /**
+     * Get precisions
+     *
+     * @return string
+     */
+    public function getPrecisions()
+    {
+        return $this->precisions;
+    }
+
+    /**
+     * Set clientName
+     *
+     * @param string $clientName
+     *
+     * @return Order
+     */
+    public function setClientName($clientName)
+    {
+        $this->clientName = $clientName;
+
+        return $this;
+    }
+
+    /**
+     * Get clientName
+     *
+     * @return string
+     */
+    public function getClientName()
+    {
+        return $this->clientName;
+    }
+
+    /**
+     * Set clientPhone
+     *
+     * @param string $clientPhone
+     *
+     * @return Order
+     */
+    public function setClientPhone($clientPhone)
+    {
+        $this->clientPhone = $clientPhone;
+
+        return $this;
+    }
+
+    /**
+     * Get clientPhone
+     *
+     * @return string
+     */
+    public function getClientPhone()
+    {
+        return $this->clientPhone;
+    }
+
+    /**
+     * Set restaurantComments
+     *
+     * @param string $restaurantComments
+     *
+     * @return Order
+     */
+    public function setRestaurantComments($restaurantComments)
+    {
+        $this->restaurantComments = $restaurantComments;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurantComments
+     *
+     * @return string
+     */
+    public function getRestaurantComments()
+    {
+        return $this->restaurantComments;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Order
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->productsList = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add statusList
+     *
+     * @param \AppBundle\Entity\OrderStatusHour $statusList
+     *
+     * @return Order
+     */
+    public function addStatusList(\AppBundle\Entity\OrderStatusHour $statusList)
+    {
+        $this->statusList[] = $statusList;
+
+        return $this;
+    }
+
+    /**
+     * Remove statusList
+     *
+     * @param \AppBundle\Entity\OrderStatusHour $statusList
+     */
+    public function removeStatusList(\AppBundle\Entity\OrderStatusHour $statusList)
+    {
+        $this->statusList->removeElement($statusList);
+    }
+
+    /**
+     * Get statusList
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStatusList()
+    {
+        return $this->statusList;
+    }
+
+    /**
+     * Add productsList
+     *
+     * @param \AppBundle\Entity\OrderProduct $productsList
+     *
+     * @return Order
+     */
+    public function addProductsList(\AppBundle\Entity\OrderProduct $productsList)
+    {
+        $this->productsList[] = $productsList;
+
+        return $this;
+    }
+
+    /**
+     * Remove productsList
+     *
+     * @param \AppBundle\Entity\OrderProduct $productsList
+     */
+    public function removeProductsList(\AppBundle\Entity\OrderProduct $productsList)
+    {
+        $this->productsList->removeElement($productsList);
+    }
+
+    /**
+     * Get productsList
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProductsList()
+    {
+        return $this->productsList;
+    }
+
+    /**
+     * Set reference
+     *
+     * @param string $reference
+     *
+     * @return Order
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Get reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Set hourToBeReady
+     *
+     * @param \DateTime $hourToBeReady
+     *
+     * @return Order
+     */
+    public function setHourToBeReady($hourToBeReady)
+    {
+        $this->hourToBeReady = $hourToBeReady;
+
+        return $this;
+    }
+
+    /**
+     * Get hourToBeReady
+     *
+     * @return string
+     */
+    public function getHourToBeReady()
+    {
+        if ($this->hourToBeReady != null)
+            return $this->hourToBeReady->format("Y-m-d H:i:s");
+        return null;
+    }
+
+    /**
+     * Add menusList
+     *
+     * @param \AppBundle\Entity\OrderMenu $menusList
+     *
+     * @return Order
+     */
+    public function addMenusList(\AppBundle\Entity\OrderMenu $menusList)
+    {
+        $this->menusList[] = $menusList;
+
+        return $this;
+    }
+
+    /**
+     * Remove menusList
+     *
+     * @param \AppBundle\Entity\OrderMenu $menusList
+     */
+    public function removeMenusList(\AppBundle\Entity\OrderMenu $menusList)
+    {
+        $this->menusList->removeElement($menusList);
+    }
+
+    /**
+     * Get menusList
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMenusList()
+    {
+        return $this->menusList;
+    }
+
+    /**
+     * Set business
+     *
+     * @param \AppBundle\Entity\Business $business
+     *
+     * @return Order
+     */
+    public function setBusiness(\AppBundle\Entity\Business $business = null)
+    {
+        $this->business = $business;
+
+        return $this;
+    }
+
+    /**
+     * Get business
+     *
+     * @return \AppBundle\Entity\Business
+     */
+    public function getBusiness()
+    {
+        return $this->business;
+    }
+
+    /**
+     * Set clientCountryCode
+     *
+     * @param string $clientCountryCode
+     *
+     * @return Order
+     */
+    public function setClientCountryCode($clientCountryCode)
+    {
+        $this->clientCountryCode = $clientCountryCode;
+
+        return $this;
+    }
+
+    /**
+     * Get clientCountryCode
+     *
+     * @return string
+     */
+    public function getClientCountryCode()
+    {
+        return $this->clientCountryCode;
+    }
+
+    /**
+     * Set clientCity
+     *
+     * @param string $clientCity
+     *
+     * @return Order
+     */
+    public function setClientCity($clientCity)
+    {
+        $this->clientCity = $clientCity;
+
+        return $this;
+    }
+
+    /**
+     * Get clientCity
+     *
+     * @return string
+     */
+    public function getClientCity()
+    {
+        return $this->clientCity;
+    }
+
+    /**
+     * Add extraLinesList
+     *
+     * @param \AppBundle\Entity\ExtraLine $extraLinesList
+     *
+     * @return Order
+     */
+    public function addExtraLinesList(\AppBundle\Entity\ExtraLine $extraLinesList)
+    {
+        $this->extraLinesList[] = $extraLinesList;
+
+        return $this;
+    }
+
+    /**
+     * Remove extraLinesList
+     *
+     * @param \AppBundle\Entity\ExtraLine $extraLinesList
+     */
+    public function removeExtraLinesList(\AppBundle\Entity\ExtraLine $extraLinesList)
+    {
+        $this->extraLinesList->removeElement($extraLinesList);
+    }
+
+    /**
+     * Get extraLinesList
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExtraLinesList()
+    {
+        return $this->extraLinesList;
+    }
+
+    /**
+     * Set isConfirmed
+     *
+     * @param boolean $isConfirmed
+     *
+     * @return Order
+     */
+    public function setIsConfirmed($isConfirmed)
+    {
+        $this->isConfirmed = $isConfirmed;
+
+        return $this;
+    }
+
+    /**
+     * Get isConfirmed
+     *
+     * @return boolean
+     */
+    public function getIsConfirmed()
+    {
+        return $this->isConfirmed;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMissingParams()
+    {
+        return $this->missingParams;
+    }
+
+    /**
+     * @param array $missingParams
+     */
+    public function setMissingParams($missingParams)
+    {
+        $this->missingParams = $missingParams;
+    }
+
+    /**
+     * Add missingParam
+     *
+     * @param string
+     *
+     * @return Order
+     */
+    public function addMissingParams($param)
+    {
+        $this->missingParams[] = $param;
+
+        return $this;
+    }
+
+    /**
+     * Remove missingParams
+     *
+     * @param string
+     */
+    public function removeMissingParams($param)
+    {
+        if (count($this->missingParams) > 0) {
+            foreach ($this->missingParams as $k => $paramMissing) {
+                if ($paramMissing == $param) {
+                    unset($this->missingParams[$k]);
+                }
+            }
+            $this->missingParams = array_values($this->missingParams);
+        }
+        return $this;
+    }
+
+    public function ActiveStatus(){
+        return $this->getActiveStatus();
+    }
+
+
+    /**
+     * Set clientTown
+     *
+     * @param \AppBundle\Entity\Town $clientTown
+     *
+     * @return Order
+     */
+    public function setClientTown(\AppBundle\Entity\Town $clientTown = null)
+    {
+        $this->clientTown = $clientTown;
+
+        return $this;
+    }
+
+    /**
+     * Get clientTown
+     *
+     * @return \AppBundle\Entity\Town
+     */
+    public function getClientTown()
+    {
+        return $this->clientTown;
+    }
+
+    /**
+     * Set restaurantAmountToCash
+     *
+     * @param float $restaurantAmountToCash
+     *
+     * @return Order
+     */
+    public function setRestaurantAmountToCash($restaurantAmountToCash)
+    {
+        $this->restaurantAmountToCash = $restaurantAmountToCash;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurantAmountToCash
+     *
+     * @return float
+     */
+    public function getRestaurantAmountToCash()
+    {
+        return $this->restaurantAmountToCash;
+    }
+
+    /**
+     * Set amountTakenByBusiness
+     *
+     * @param float $amountTakenByBusiness
+     *
+     * @return Order
+     */
+    public function setAmountTakenByBusiness($amountTakenByBusiness)
+    {
+        $this->amountTakenByBusiness = $amountTakenByBusiness;
+
+        return $this;
+    }
+
+    /**
+     * Get amountTakenByBusiness
+     *
+     * @return float
+     */
+    public function getAmountTakenByBusiness()
+    {
+        return $this->amountTakenByBusiness;
+    }
+}

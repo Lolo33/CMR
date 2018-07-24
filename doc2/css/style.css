@@ -1,0 +1,457 @@
+/**
+    ***** ANIMATIONS ******
+ */
+
+body {
+    line-height: 1;
+    font-size: 15px;
+}
+
+#logo-spinner {
+    margin-top: 200px;
+    text-align: center;
+    color: white;
+    font-family: 'Audiowide', cursive;
+    text-shadow: 7px 7px 7px black;
+}
+
+section a {
+    font-weight: bold;
+}
+
+#cache {
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    background: orangered;
+    animation-duration: 1s;
+    animation-name: fade-in;
+}
+
+@keyframes fade-in{
+    from {
+        visibility: visible;
+    }
+    to {
+        visibility: hidden;
+    }
+}
+
+
+#spinner {
+    visibility: hidden;
+    animation-duration: 1s;
+    animation-name: slidein;
+}
+@keyframes slidein{
+    from {
+        top: 0;
+        visibility: visible;
+    }
+    5% {
+        top: 50%;
+    }
+    to {
+        visibility: hidden;
+    }
+}
+
+
+.espace-top {
+    margin-top: 20px;
+}
+.espace-bot {
+    margin-bottom: 20px;
+}
+
+.titre-menu {
+    text-align: center;
+    color: orangered;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 14px;
+    margin-top: 14px;
+}
+
+.nav-tool {
+    border-right: 1px solid lightgrey;
+    position: fixed;
+    bottom:0;
+    top:0;
+    width: 20%;
+    background: #f5f5f5;
+    overflow: auto;
+    z-index: 2;
+}
+.cont-tool {
+    width: 80%;
+    background-color: white;
+    font-family: 'Josefin Sans', sans-serif;
+    min-height: 80%;
+    margin-left: 20%;
+}
+.contenu-right {
+    margin-left: 270px;
+}
+.contenu-right h2 {
+    margin: 0;
+    padding: 15px;
+    border-bottom: 0.2px double #faf2cc;
+    color: #c34113;
+    font-family: 'Muli', sans-serif;
+}
+.infos-tool, .exemple-tool {
+    padding: 40px;
+    min-height: 500px;
+}
+section.row {
+    padding:0;
+    margin: 0;
+}
+.infos-tool {
+    font-family: 'Josefin Sans', sans-serif;
+    line-height: 1.2;
+}
+.exemple-tool {
+    background: #2d3e3f;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+}
+.titre-exemple {
+    color: #e6e1dc;
+    margin-top: 40px;
+}
+.navigation {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    width: 270px;
+    background: #e95420;
+    font-family: 'Kanit', sans-serif;
+    color: white;
+    border-right: 1px solid #002b36;
+}
+.nav-left > ul {
+    list-style-type: none;
+    padding: 0;
+}
+.nav-left > ul > li {
+    list-style-type: none;
+    margin: 0;
+}
+.nav-titre {
+    padding: 10px;
+    margin-bottom: 20px;
+    color: white;
+}
+.nav-left > ul > li > a {
+    display: block;
+    color: white;
+    padding: 10px 20px;
+    width: 100%;
+}
+.nav-left > ul > li > a > .glyphicon {
+    font-size: 10pt;
+}
+.nav-left > ul > li > a:hover, .nav-left > ul > li > a:focus, .nav-left-item-active {
+    text-decoration: none;
+    border-left: 2px double white;
+    background: #c34113;
+}
+.nav-left-item {
+    font-size: 15pt;
+}
+.sous-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.nav > li > a{
+    padding: 4px 6px;
+}
+.sous-menu-item, .sous-menu-item-active {
+    cursor: pointer;
+}
+.sous-menu a, .sous-menu a:hover, .sous-menu a:focus {
+    color: black;
+    font-style: oblique;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding: 5px 20px;
+}
+.sous-menu-item:hover, .sous-menu-item-active {
+    background: #f7e5c0;
+}
+
+.no-bg {
+    background: white;
+}
+td a[data-descr]:hover:after {
+    content: attr(data-descr);
+    position: absolute;
+    width: 200px;
+    margin-left: 20px;
+    border: 1px #aaaaaa solid;
+    border-radius: 10px;
+    padding: 12px;
+    color: white;
+    font-size: 14px;
+    z-index: 1;
+    background: darkslategrey;
+}
+#contenu-doc {
+    width: 100%;
+}
+.titre-section {
+    color: darkslategrey;
+    margin-bottom: 30px;
+    text-align: center;
+    text-decoration: underline;
+}
+.prop-obj-type {
+    color: darkslateblue;
+}
+
+section {
+    margin: 0;
+    width: 100%;
+}
+.section-color-1 {
+    background-color: #f7e5c0;
+}
+.params-list{
+    margin-bottom: 40px;
+}
+#choix {
+    position: fixed;
+    text-align: center;
+    background: orangered;
+    top:0;
+    bottom:0;
+}
+.page-choix {
+    margin-top: 10%;
+}
+.page-choix a {
+    background: darkslategrey;
+    color: whitesmoke;
+    font-size: 30px;
+    font-family: 'Baloo Bhaijaan', cursive;
+}
+.page-choix a:hover {
+    background: white;
+    text-decoration: none;
+    color: darkslategrey;
+}
+.lien-choix {
+    border-radius: 5px;
+    padding: 5% 0;
+    border: 1px solid white;
+    display: inline-block;
+    width: 60%;
+    margin: auto;
+}
+.section-doc {
+    margin-top: 50px;
+}
+.requete-description {
+    margin-bottom: 20px;
+}
+.obj-description a, .requete-description a {
+    color: orangered;
+}
+.obj-description a:hover, .obj-description a:focus, .requete-description a:hover, .requete-description a:focus {
+    text-decoration: none;
+    color: orangered;
+}
+.container-fluid{
+    width: 100%;
+    margin:0;
+}
+.pager--not-link {
+    width: 200px; margin-right: 10px;
+}
+/*
+    Conteneur de la methode HTTP
+*/
+.url, .methode-http {
+    border: 1px solid lightslategrey;
+    padding: 7px;
+    width: 100%;
+    border-radius: 5px;
+}
+.methode-http {
+    text-align: center;
+    color: white;
+}
+.url {
+    background: #f5f5f5;
+}
+.methode-get {
+    background: forestgreen;
+}
+.methode-post {
+    background: orangered;
+}
+.methode-delete {
+    background: darkred;
+}
+.methode-put {
+    background: steelblue;
+}
+.methode-patch {
+    background: darkslateblue;
+}
+.method {
+    margin: 0 0 20px;
+    padding: 1px;
+}
+
+h4{
+    font-size: 18px;
+    text-align: center
+}
+/*
+    Styles de code
+*/
+.code {
+    max-height: 670px;
+    overflow: auto;
+}
+.select-langage {
+    margin: 0;
+    white-space: normal;
+}
+.tab-code {
+    background: darkslategrey;
+}
+.code-select {
+    border-left: 1px solid lightslategrey;
+    border-right: 1px solid lightslategrey;
+    border-top: 1px solid lightslategrey;
+    background: grey;
+    text-align: center;
+    color: darkslateblue;
+ }
+.code-select a {
+    color: white;
+}
+.code-select a:hover {
+    color: black;
+}
+.example {
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+/*
+    ***** INDEX *****
+ */
+
+.liens-accueil {
+    border: 2px dashed lightslategrey;
+    border-radius: 10px;
+    padding: 30px 0;
+}
+.liens-accueil a {
+    text-decoration: none;
+    font-family: 'Baloo Bhaijaan', cursive;
+    color: darkslategrey;
+    font-size: 20px;
+}
+.liens-accueil .deco {
+    color: indianred;
+}
+.liens-accueil .deco:hover, .liens-accueil .deco:focus {
+    color: red;
+}
+.liens-accueil a:hover, .liens-accueil a:focus {
+    color: lightslategrey;
+}
+.liens-accueil-new-line {
+    margin-top: 30px;
+}
+.desactive {
+    display: none;
+    background: grey;
+}
+.nav-titre {
+    background: darkorange;
+    text-align: center;
+    color: white;
+    padding: 10px 0;
+
+    margin-bottom: 0;
+}
+.img-index {
+    margin-bottom: 10px;
+}
+
+/**
+    ***** TABLEAU DE BORD *****
+ */
+.titre-info-api, .info-api {
+    display: inline-block;
+}
+.info-api {
+    text-align: right;
+    font-family: "Calibri";
+}
+.new-line-info-api {
+    margin: 4px 20px;
+}
+.titre-info-api {
+    width: 200px;
+}
+.titre-page {
+    text-align: left;
+    color: #4C5B5C;
+    margin: 10px 0 20px;
+    font-size: 20px;
+}
+.sous-titre-page {
+    color: #4C5B5C;
+    margin: 0;
+    font-size: 15px;
+}
+.margin-gerer {
+    margin: 0 10% 10px;
+}
+.titre-gerer {
+    font-size: 20px;
+    text-align: left;
+    color: darkslategrey;
+    margin: 0 10% 10px;
+}
+#input-api-key {
+    width: 300px;
+}
+/**
+    ***** INSCRIPTION / FORMULAIRES *****
+ */
+.form-conteneur {
+    background: #f5f5f5;
+}
+.form-conteneur legend {
+    border-color: darkslategrey;
+    padding: 5px 0;
+}
+.form-conteneur, .conteneur-light {
+    padding: 10px;
+}
+.conteneur-light {
+    padding: 15px;
+    width: 80%;
+    margin: auto;
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(102,103,112,1);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(102,103,112,1);
+    box-shadow: 1px 1px 5px 0px rgba(102,103,112,1);
+    border-radius: 1px;
+}
+.btn-zone {
+    text-align:right;
+    margin-top: 10px;
+}

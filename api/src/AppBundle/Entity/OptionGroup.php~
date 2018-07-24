@@ -1,0 +1,136 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * OptionGroup
+ *
+ * @ORM\Table(name="option_group")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OptionGroupRepository")
+ */
+class OptionGroup
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="opt_grp_name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Restaurant")
+     */
+    private $restaurant;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="opt_grp_position", type="integer")
+     */
+    private $position;
+
+    /**
+     * @var int
+     *
+     * @ORM\OneToMany(targetEntity="Option", mappedBy="optionGroup")
+     */
+    private $optionsList;
+
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return OptionGroup
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set restaurant
+     *
+     * @param string $restaurant
+     *
+     * @return OptionGroup
+     */
+    public function setRestaurant($restaurant)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant
+     *
+     * @return string
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return OptionGroup
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+}
+

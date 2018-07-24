@@ -1,0 +1,187 @@
+get_buisnesses:
+    path:     /getBuisnesses
+    defaults: { _controller: AppBundle:Buisnesses:getBuisnesses }
+
+get_buisness:
+    path:     /getBuisness
+    defaults: { _controller: AppBundle:Buisnesses:getBuisness }
+
+post_buisness:
+    path:     /postBuisness
+    defaults: { _controller: AppBundle:Buisnesses:postBuisness }
+
+remove_buisness:
+    path:     /removeBuisness
+    defaults: { _controller: AppBundle:Buisnesses:removeBuisness }
+
+update_buisness:
+    path:     /updateBuisness
+    defaults: { _controller: AppBundle:Buisnesses:updateBuisness }
+
+get_lieu:
+    path:     /getLieu
+    defaults: { _controller: AppBundle:Complexe:getLieu }
+
+get_lieux:
+    path:     /getLieux
+    defaults: { _controller: AppBundle:Complexe:getLieux }
+
+get_tarifs:
+    path:     /getTarifs
+    defaults: { _controller: AppBundle:PlanningTarif:getTarifs }
+
+get_tarif:
+    path:     /getTarif
+    defaults: { _controller: AppBundle:PlanningTarif:getTarif }
+
+get_terrains:
+    path:     /getTerrains
+    defaults: { _controller: AppBundle:Terrain:getTerrains }
+
+get_terrain:
+    path:     /getTerrain
+    defaults: { _controller: AppBundle:Terrain:getTerrain }
+
+get_comissions:
+    path:     /getComissions
+    defaults: { _controller: AppBundle:PlanningComission:getComissions }
+
+get_comission:
+    path:     /getComission
+    defaults: { _controller: AppBundle:PlanningComission:getComission }
+
+get_horaires:
+    path:     /getHoraires
+    defaults: { _controller: AppBundle:PlageHoraire:getHoraires }
+
+get_horaire:
+    path:     /getHoraire
+    defaults: { _controller: AppBundle:PlageHoraire:getHoraire }
+
+get_reservations:
+    path:     /getReservations
+    defaults: { _controller: AppBundle:Reservation:getReservations }
+
+get_reservation:
+    path:     /getReservation
+    defaults: { _controller: AppBundle:Reservation:getReservation }
+
+post_reservation:
+    path:     /postReservation
+    defaults: { _controller: AppBundle:Reservation:postReservation }
+
+update_reservation:
+    path:     /updateReservation
+    defaults: { _controller: AppBundle:Reservation:updateReservation }
+
+connect:
+    path:     /connect
+    defaults: { _controller: AppBundle:Commercials:connect }
+
+get_requirements:
+    path:     /getRequirements
+    defaults: { _controller: AppBundle:Requirements:getRequirements }
+
+post_requirements:
+    path:     /postRequirements
+    defaults: { _controller: AppBundle:Requirements:postRequirements }
+
+get_clients:
+    path:     /getClients
+    defaults: { _controller: AppBundle:Clients:getClients }
+
+get_status:
+    path:     /getStatus
+    defaults: { _controller: AppBundle:Status:getStatus }
+
+get_restaurants:
+    path:     /getRestaurants
+    defaults: { _controller: AppBundle:RestaurantController:getRestaurants }
+
+get_restaurant:
+    path:     /getRestaurant
+    defaults: { _controller: AppBundle:RestaurantController:getRestaurant }
+
+get_orders:
+    path:     /getOrders
+    defaults: { _controller: AppBundle:Order:getOrders }
+
+get_order:
+    path:     /getOrder
+    defaults: { _controller: AppBundle:Order:getOrder }
+
+post_order:
+    path:     /postOrder
+    defaults: { _controller: AppBundle:Order:postOrder }
+
+remove_order:
+    path:     /removeOrder
+    defaults: { _controller: AppBundle:Order:removeOrder }
+
+get_schedules:
+    path:     /getSchedules
+    defaults: { _controller: AppBundle:ScheduleDelivery:getSchedules }
+
+get_schedule:
+    path:     /getSchedule
+    defaults: { _controller: AppBundle:ScheduleDelivery:getSchedule }
+
+get_status:
+    path:     /getStatus
+    defaults: { _controller: AppBundle:OrderStatus:getStatus }
+
+post_status:
+    path:     /postStatus
+    defaults: { _controller: AppBundle:OrderStatus:postStatus }
+
+connect_restaurant_user:
+    path:     /connectRestaurantUser
+    defaults: { _controller: AppBundle:RestaurantUser:connectRestaurantUser }
+
+get_bookings:
+    path:     /getBookings
+    defaults: { _controller: AppBundle:Booking:getBookings }
+
+get_booking:
+    path:     /getBooking
+    defaults: { _controller: AppBundle:Booking:getBooking }
+
+get_booking_restaurant:
+    path:     /getBookingRestaurant
+    defaults: { _controller: AppBundle:Booking:getBookingRestaurant }
+
+post_booking:
+    path:     /postBooking
+    defaults: { _controller: AppBundle:Booking:postBooking }
+
+remove_booking:
+    path:     /removeBooking
+    defaults: { _controller: AppBundle:Booking:removeBooking }
+
+get_tables:
+    path:     /getTables
+    defaults: { _controller: AppBundle:Table:getTables }
+
+get_table:
+    path:     /getTable
+    defaults: { _controller: AppBundle:Table:getTable }
+
+post_table:
+    path:     /postTable
+    defaults: { _controller: AppBundle:Table:postTable }
+
+remove_table:
+    path:     /removeTable
+    defaults: { _controller: AppBundle:Table:removeTable }
+
+get_blocs:
+    path:     /getBlocs
+    defaults: { _controller: AppBundle:BookingBlocs:getBlocs }
+
+get_schedule_of_day:
+    path:     /getScheduleOfDay
+    defaults: { _controller: AppBundle:ScheduleBooking:getScheduleOfDay }
+
+get_payment_modes:
+    path:     /getPaymentModes
+    defaults: { _controller: AppBundle:PaymentMode:getPaymentModes }

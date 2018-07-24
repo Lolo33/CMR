@@ -1,0 +1,71 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Buisness
+ *
+ * @ORM\Table(name="buisness")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BuisnessRepository")
+ */
+class Buisness extends Corporate
+{
+
+    /**
+     * @var Order[]
+     *
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="buisness")
+     */
+    private $ordersList;
+
+    /**
+     * @var AppliedFee[]
+     *
+     * @ORM\OneToMany(targetEntity="AppliedFee", mappedBy="buisness")
+     */
+    private $appliedFees;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ordersList = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add ordersList
+     *
+     * @param \AppBundle\Entity\Order $ordersList
+     *
+     * @return Buisness
+     */
+    public function addOrdersList(\AppBundle\Entity\Order $ordersList)
+    {
+        $this->ordersList[] = $ordersList;
+
+        return $this;
+    }
+
+    /**
+     * Remove ordersList
+     *
+     * @param \AppBundle\Entity\Order $ordersList
+     */
+    public function removeOrdersList(\AppBundle\Entity\Order $ordersList)
+    {
+        $this->ordersList->removeElement($ordersList);
+    }
+
+    /**
+     * Get ordersList
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrdersList()
+    {
+        return $this->ordersList;
+    }
+}

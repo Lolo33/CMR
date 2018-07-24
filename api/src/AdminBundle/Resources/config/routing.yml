@@ -1,0 +1,7 @@
+admin_homepage:
+    path:     /
+    defaults: { _controller: AdminBundle:Default:index }
+
+get_countries:
+    path:     /getCountries
+    defaults: { _controller: AdminBundle:Utils:getCountries }

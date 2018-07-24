@@ -1,0 +1,33 @@
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+apiuser:
+    type:     rest
+    resource: AppBundle\Controller\ApiUserController
+
+auth-tokens:
+    type:     rest
+    resource: AppBundle\Controller\UserKeyController
+
+restaurants:
+    type:     rest
+    resource: AppBundle\Controller\RestaurantController
+
+orders:
+    type:     rest
+    resource: AppBundle\Controller\OrderController
+
+schedules:
+    type:     rest
+    resource: AppBundle\Controller\ScheduleBookingController
+
+utils:
+    type:     rest
+    resource: AdminBundle\Controller\UtilsController
+
+
